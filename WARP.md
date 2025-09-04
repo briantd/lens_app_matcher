@@ -32,16 +32,16 @@ pip install -e .
 
 ### Running the Application
 
-**Code Pattern Search:**
+**Kubernetes Label Search:**
 ```bash
-# Search for Kubernetes app.kubernetes.io/name labels
-uv run python src/lens_app_matcher.py -p "app.kubernetes.io/name" -l yaml --max-results 50
+# Search for Kubernetes app.kubernetes.io/name and app.kubernetes.io/component labels
+uv run python src/lens_app_matcher.py -l yaml --max-results 50
 
 # Search in a specific repository
-uv run python src/lens_app_matcher.py -p "app.kubernetes.io/name" -r "kubernetes/kubernetes" --output k8s_labels.json
+uv run python src/lens_app_matcher.py -r "kubernetes/kubernetes" --output k8s_labels.json
 
-# Search for Docker patterns
-uv run python src/lens_app_matcher.py -p "FROM node" -l dockerfile --max-results 30
+# Search with language filter
+uv run python src/lens_app_matcher.py -l yaml --max-results 30
 ```
 
 **Basic Commands:**
@@ -61,11 +61,11 @@ export GITHUB_TOKEN=your_github_token_here
 # Show all available commands
 uv run python src/lens_app_matcher.py --help
 
-# Test code search functionality
-uv run python src/lens_app_matcher.py -p "apiVersion" -l yaml --max-results 10
+# Test code search functionality with language filter
+uv run python src/lens_app_matcher.py -l yaml --max-results 10
 
-# Search for specific Kubernetes patterns
-uv run python src/lens_app_matcher.py -p "app.kubernetes.io/name" -l yaml
+# Search in specific repository
+uv run python src/lens_app_matcher.py -r "owner/repo" -l yaml
 ```
 
 ### Testing
