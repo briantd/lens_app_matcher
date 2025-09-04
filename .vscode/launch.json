@@ -100,7 +100,7 @@
             "env": {
                 "PYTHONPATH": "${workspaceFolder}/src"
             }
-        }
+        },
         {
             "name": "Python Debugger: Current File with Arguments",
             "type": "debugpy",
