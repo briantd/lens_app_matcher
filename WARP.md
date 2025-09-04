@@ -10,7 +10,6 @@ This is a Python-based Lens App Name Matcher that searches GitHub repositories t
 
 The project follows a modular architecture with clear separation of concerns:
 
-- **`main.py`**: Simple entry point (currently basic, likely for testing)
 - **`src/lens_app_matcher.py`**: Main application containing:
   - `GitHubAPIClient`: Handles GitHub API interactions with authentication and code search capabilities
   - `CodeSearchResult`: Data structure for code search results with extracted values
@@ -47,9 +46,6 @@ uv run python src/lens_app_matcher.py -p "FROM node" -l dockerfile --max-results
 
 **Basic Commands:**
 ```bash
-# Run the basic main.py
-python main.py
-
 # Show all available commands
 uv run python src/lens_app_matcher.py --help
 ```
