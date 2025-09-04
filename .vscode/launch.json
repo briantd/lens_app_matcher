@@ -1,0 +1,107 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Lens App Matcher: Top 10 Results",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/lens_app_matcher.py",
+            "args": [
+                "-p", "app.kubernetes.io/name",
+                "-l", "yaml",
+                "--max-results", "10"
+            ],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Lens App Matcher: Top 10 with JSON Output",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/lens_app_matcher.py",
+            "args": [
+                "-p", "app.kubernetes.io/name",
+                "-l", "yaml",
+                "--max-results", "10",
+                "--output", "top10_results.json"
+            ],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Lens App Matcher: Search Specific Repo",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/lens_app_matcher.py",
+            "args": [
+                "-p", "app.kubernetes.io/name",
+                "-r", "kubernetes/kubernetes",
+                "--max-results", "5"
+            ],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Lens App Matcher: Help",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/lens_app_matcher.py",
+            "args": ["--help"],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "name": "Run Tests: All",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "tests/",
+                "-v"
+            ],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "name": "Run Tests: Label Extraction",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "tests/test_label_extraction.py",
+                "-v"
+            ],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "name": "Python Debugger: Current File with Arguments",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": "${command:pickArgs}"
+        }
+    ]
+}
