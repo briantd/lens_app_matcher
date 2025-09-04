@@ -6,6 +6,7 @@
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/src/lens_app_matcher.py",
+            "python": "${workspaceFolder}/.venv/bin/python",
             "args": [
                 "-p", "app.kubernetes.io/name",
                 "-l", "yaml",
@@ -23,6 +24,7 @@
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/src/lens_app_matcher.py",
+            "python": "${workspaceFolder}/.venv/bin/python",
             "args": [
                 "-p", "app.kubernetes.io/name",
                 "-l", "yaml",
@@ -41,6 +43,7 @@
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/src/lens_app_matcher.py",
+            "python": "${workspaceFolder}/.venv/bin/python",
             "args": [
                 "-p", "app.kubernetes.io/name",
                 "-r", "kubernetes/kubernetes",
@@ -58,6 +61,7 @@
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/src/lens_app_matcher.py",
+            "python": "${workspaceFolder}/.venv/bin/python",
             "args": ["--help"],
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
@@ -69,8 +73,9 @@
             "name": "Run Tests: All",
             "type": "debugpy",
             "request": "launch",
-            "module": "pytest",
+            "program": "${workspaceFolder}/.venv/bin/python",
             "args": [
+                "-m", "pytest",
                 "tests/",
                 "-v"
             ],
@@ -84,8 +89,9 @@
             "name": "Run Tests: Label Extraction",
             "type": "debugpy",
             "request": "launch",
-            "module": "pytest",
+            "program": "${workspaceFolder}/.venv/bin/python",
             "args": [
+                "-m", "pytest",
                 "tests/test_label_extraction.py",
                 "-v"
             ],
@@ -94,7 +100,7 @@
             "env": {
                 "PYTHONPATH": "${workspaceFolder}/src"
             }
-        },
+        }
         {
             "name": "Python Debugger: Current File with Arguments",
             "type": "debugpy",
