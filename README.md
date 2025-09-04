@@ -1,27 +1,23 @@
-# GitHub App Name Generator
+# Lens App Name Matcher
 
-A tool for generating creative and meaningful application names based on GitHub project data and patterns.
+A tool for finding and extracting Kubernetes `app.kubernetes.io/name` label values from GitHub repositories.
 
 ## Overview
 
-This project analyzes GitHub repositories to suggest potential application names by examining:
-- Repository names and patterns
-- Project descriptions and topics
-- Popular naming conventions
-- Domain-specific terminology
+This project searches GitHub repositories to find instances of the `app.kubernetes.io/name` Kubernetes label and extracts the actual string values assigned to it. This is useful for discovering naming patterns and conventions used in real-world Kubernetes applications.
 
 ## Features
 
-- **GitHub API Integration**: Fetch repository data and metadata
-- **Name Pattern Analysis**: Extract common naming patterns from successful projects
-- **Smart Suggestions**: Generate contextually relevant app names
-- **Filtering Options**: Filter by language, topic, or project type
-- **Export Capabilities**: Save generated names to various formats
+- **GitHub Code Search Integration**: Uses GitHub's Code Search API to find label patterns
+- **Value Extraction**: Automatically extracts the actual values assigned to `app.kubernetes.io/name` labels
+- **Rich Display**: Shows results in a formatted table with repository, file path, extracted values, and context
+- **Filtering Options**: Filter by programming language or specific repositories
+- **Export Capabilities**: Save search results to JSON format
 
 ## Prerequisites
 
-- Python 3.8+ (or Node.js 16+ if using JavaScript implementation)
-- GitHub API token (for higher rate limits)
+- Python 3.13+
+- GitHub API token (required for code search)
 - Internet connection for API access
 
 ## Installation
@@ -29,14 +25,12 @@ This project analyzes GitHub repositories to suggest potential application names
 1. Clone this repository:
    ```bash
    git clone <repository-url>
-   cd github-app-name-generator
+   cd lens-app-name-matcher
    ```
 
-2. Install dependencies:
+2. Install dependencies using uv:
    ```bash
-   pip install -r requirements.txt
-   # or
-   npm install
+   uv sync
    ```
 
 3. Set up GitHub API token:
@@ -49,18 +43,20 @@ This project analyzes GitHub repositories to suggest potential application names
 ### Basic Usage
 
 ```bash
-python src/name_generator.py --topic web --count 10
+uv run python src/lens_app_matcher.py -p "app.kubernetes.io/name" -l yaml
 ```
 
 ### Advanced Options
 
 ```bash
-python src/name_generator.py \
-  --topic "machine learning" \
-  --language python \
-  --min-stars 100 \
-  --count 20 \
-  --output names.json
+# Search for app.kubernetes.io/name labels in YAML files
+uv run python src/lens_app_matcher.py -p "app.kubernetes.io/name" -l yaml --max-results 50
+
+# Search in a specific repository
+uv run python src/lens_app_matcher.py -p "app.kubernetes.io/name" -r "kubernetes/kubernetes" --output results.json
+
+# Search with higher result limit and save to file
+uv run python src/lens_app_matcher.py -p "app.kubernetes.io/name" -l yaml --max-results 100 --output k8s_labels.json
 ```
 
 ## Configuration
@@ -83,20 +79,20 @@ filters:
 
 ## Examples
 
-Generate names for a web development project:
+Search for Kubernetes app name labels:
 ```bash
-python src/name_generator.py --topic web --language javascript
+uv run python src/lens_app_matcher.py -p "app.kubernetes.io/name" -l yaml --max-results 20
 ```
 
 Output:
 ```
-Suggested App Names:
-1. WebCraftJS
-2. ReactFlow
-3. VueForge
-4. NextGenWeb
-5. StackBuilder
-...
+┌─────────────────────────────────────────┬──────────────────────────────┬──────────────────┬────────────────────────────────────────┐
+│ Repository                              │ File Path                    │ Extracted Values │ Context                                │
+├─────────────────────────────────────────┼──────────────────────────────┼──────────────────┼────────────────────────────────────────┤
+│ kubernetes/examples                     │ staging/volumes/nfs/nfs.yaml │ nfs-server       │ app.kubernetes.io/name: nfs-server     │
+│ helm/charts                             │ stable/mysql/values.yaml     │ mysql            │ app.kubernetes.io/name: mysql          │
+│ kubernetes-sigs/aws-load-balancer...    │ docs/examples/game.yaml      │ "2048"           │ app.kubernetes.io/name: "2048"         │
+└─────────────────────────────────────────┴──────────────────────────────┴──────────────────┴────────────────────────────────────────┘
 ```
 
 ## Contributing
@@ -113,8 +109,9 @@ MIT License - see LICENSE file for details.
 
 ## Roadmap
 
-- [ ] Add support for GitLab and Bitbucket
-- [ ] Implement ML-based name generation
-- [ ] Add name availability checking
-- [ ] Create web interface
-- [ ] Add name scoring and ranking
+- [ ] Support for other Kubernetes labels (app.kubernetes.io/component, app.kubernetes.io/part-of, etc.)
+- [ ] Add filtering by star count and repository activity
+- [ ] Statistical analysis of naming patterns
+- [ ] Export to different formats (CSV, Excel)
+- [ ] Web interface for easier searching
+- [ ] Integration with Kubernetes lens for direct import

@@ -1,7 +1,7 @@
 [project]
-name = "github-app-name-generator"
+name = "lens-app-name-matcher"
 version = "0.1.0"
-description = "Add your description here"
+description = "A tool for finding and extracting Kubernetes app.kubernetes.io/name label values from GitHub repositories"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -9,4 +9,27 @@ dependencies = [
     "pyyaml>=6.0.2",
     "requests>=2.32.5",
     "rich>=14.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q --strict-markers"
+testpaths = [
+    "tests",
+]
+python_files = [
+    "test_*.py",
+    "*_test.py",
+]
+python_classes = [
+    "Test*",
+]
+python_functions = [
+    "test_*",
 ]
