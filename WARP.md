@@ -40,8 +40,8 @@ uv run python src/lens_app_matcher.py -l yaml --max-results 50
 # Search in a specific repository
 uv run python src/lens_app_matcher.py -r "kubernetes/kubernetes" --output k8s_labels.json
 
-# Search with language filter
-uv run python src/lens_app_matcher.py -l yaml --max-results 30
+# Search with language filter and tab-separated output
+uv run python src/lens_app_matcher.py -l yaml --max-results 30 --tab-output labels.tsv
 ```
 
 **Basic Commands:**
@@ -66,6 +66,9 @@ uv run python src/lens_app_matcher.py -l yaml --max-results 10
 
 # Search in specific repository
 uv run python src/lens_app_matcher.py -r "owner/repo" -l yaml
+
+# Generate both JSON and tab-separated output
+uv run python src/lens_app_matcher.py -l yaml --output results.json --tab-output results.tsv
 ```
 
 ### Testing

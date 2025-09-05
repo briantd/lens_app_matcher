@@ -43,20 +43,23 @@ This project searches GitHub repositories to find instances of the `app.kubernet
 ### Basic Usage
 
 ```bash
-uv run python src/lens_app_matcher.py -p "app.kubernetes.io/name" -l yaml
+uv run python src/lens_app_matcher.py -l yaml
 ```
 
 ### Advanced Options
 
 ```bash
-# Search for app.kubernetes.io/name labels in YAML files
-uv run python src/lens_app_matcher.py -p "app.kubernetes.io/name" -l yaml --max-results 50
+# Search for Kubernetes labels in YAML files with higher result limit
+uv run python src/lens_app_matcher.py -l yaml --max-results 50
 
 # Search in a specific repository
-uv run python src/lens_app_matcher.py -p "app.kubernetes.io/name" -r "kubernetes/kubernetes" --output results.json
+uv run python src/lens_app_matcher.py -r "kubernetes/kubernetes" --output results.json
 
-# Search with higher result limit and save to file
-uv run python src/lens_app_matcher.py -p "app.kubernetes.io/name" -l yaml --max-results 100 --output k8s_labels.json
+# Search with custom result limit and save to file
+uv run python src/lens_app_matcher.py -l yaml --max-results 100 --output k8s_labels.json
+
+# Generate tab-separated output with MD5 hashes
+uv run python src/lens_app_matcher.py -l yaml --max-results 30 --tab-output labels.tsv
 ```
 
 ## Configuration
@@ -79,9 +82,9 @@ filters:
 
 ## Examples
 
-Search for Kubernetes app name labels:
+Search for Kubernetes app name and component labels:
 ```bash
-uv run python src/lens_app_matcher.py -p "app.kubernetes.io/name" -l yaml --max-results 20
+uv run python src/lens_app_matcher.py -l yaml --max-results 20
 ```
 
 Output:
